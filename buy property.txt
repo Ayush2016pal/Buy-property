@@ -1,0 +1,18 @@
+//SPDX-License-Identifier:MIT
+pragma solidity ^0.8.0;
+
+contract Property {
+    address public owner;
+    uint256 public price;
+
+    constructor(address _owner, uint256 _price) {
+        owner = _owner;
+        price = _price;
+    }
+
+    function buyProperty() public payable {
+        require(msg.sender != owner, "You already own this property.");
+        require(msg.value == price, "The amount sent does not match the price of the property.");
+        owner = msg.sender;
+    }
+}
